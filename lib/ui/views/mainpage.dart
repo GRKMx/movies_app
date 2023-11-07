@@ -39,11 +39,11 @@ class _MainPageState extends State<MainPage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Image.asset("images/${movie.image}"),
+                        Image.network("http://kasimadalan.pe.hu/filmler_yeni/resimler/${movie.image}"),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text("${movie.name} ₺",style: const TextStyle(fontSize: 24),),
+                            Text("${movie.price} ₺",style: const TextStyle(fontSize: 21),),
                             ElevatedButton(onPressed: (){}, child: const Text("Cart"))
                           ],
                         )

@@ -19,7 +19,7 @@ class _DetailPageState extends State<DetailPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Image.asset("images/${widget.movie.image}"),
+            Image.network("http://kasimadalan.pe.hu/filmler_yeni/resimler/${widget.movie.image}"),
             Text("${widget.movie.price} ₺",style: const TextStyle(fontSize: 50),),
           ],
         ),
