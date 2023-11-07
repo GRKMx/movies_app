@@ -43,7 +43,7 @@ class _MainPageState extends State<MainPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text("${movie.name} ₺",style: const TextStyle(fontSize: 24),),
+                            Text("${movie.price} ₺",style: const TextStyle(fontSize: 19),),
                             ElevatedButton(onPressed: (){}, child: const Text("Cart"))
                           ],
                         )

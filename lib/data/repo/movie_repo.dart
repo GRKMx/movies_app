@@ -1,13 +1,15 @@
 import 'package:movies_app/data/entity/movie.dart';
+import 'package:movies_app/sqlite/database_provider.dart';
 
 class MovieRepository {
 
   Future<List<Movie>> loadMovies() async {
-    var moviesList = <Movie>[];
-    var m1 = Movie(id: 1, name: "Django", image: "django.png", price: 24);
-    var m2 = Movie(id: 2, name: "Django", image: "django.png", price: 24);
-    moviesList.add(m1);
-    moviesList.add(m2);
-    return moviesList;
+    var db = await DatabaseProvider.dbAccess();
+    List<Map<String,dynamic>> maps = await db.rawQuery("SELECT * FROM movie");
+
+    return List.generate(maps.length, (index) {
+      var row = maps[index];
+      return Movie(id: row["id"], name: row["name"], image: row["image"], price: row["price"]);
+    });
   }
 }
