@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/data/entity/movie.dart';
+import 'package:movies_app/ui/cubit/mainpage_cubit.dart';
 import 'package:movies_app/ui/views/detailpage.dart';
 
 class MainPage extends StatefulWidget {
@@ -11,26 +13,21 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
 
-  Future<List<Movies>> loadMovies() async {
-    var moviesList = <Movies>[];
-    var m1 = Movies(id: 1, name: "Django", image: "django.png", price: 24);
-    var m2 = Movies(id: 2, name: "Django", image: "django.png", price: 24);
-    moviesList.add(m1);
-    moviesList.add(m2);
-    return moviesList;
+  @override
+  void initState() {
+    super.initState();
+    context.read<MainPageCubit>().loadMovies();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Movies"),),
-      body: FutureBuilder<List<Movies>>(
-        future: loadMovies(),
-        builder: (context,snapshot){
-          if(snapshot.hasData) {
-            var movieList = snapshot.data;
+      body: BlocBuilder<MainPageCubit,List<Movie>>(
+        builder: (context,movieList){
+          if(movieList.isNotEmpty) {
             return GridView.builder(
-              itemCount: movieList!.length,
+              itemCount: movieList.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 1 / 1.8),
               itemBuilder: (context,index){
                 var movie = movieList[index];

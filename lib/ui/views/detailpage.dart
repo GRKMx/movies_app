@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/data/entity/movie.dart';
 
 class DetailPage extends StatefulWidget {
-  Movies movie;
+  Movie movie;
   DetailPage({required this.movie});
 
   @override
